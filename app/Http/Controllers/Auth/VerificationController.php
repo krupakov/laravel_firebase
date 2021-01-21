@@ -27,9 +27,9 @@ class VerificationController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function verify(Request $request, $id)
+    public function verify(Request $request, $user)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user);
 
         if (! URL::hasValidSignature($request)) {
             return response()->json([

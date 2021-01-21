@@ -36,7 +36,7 @@ $api->version('v1', function ($api) {
         $api->post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
         $api->post('password/reset', [ResetPasswordController::class, 'reset']);
     
-        $api->post('email/verify/{id}', [VerificationController::class, 'verify'])->name('verification.verify');
+        $api->post('email/verify/{user}', [VerificationController::class, 'verify'])->name('verification.verify');
         $api->post('email/resend', [VerificationController::class, 'resend']);
     });
 });

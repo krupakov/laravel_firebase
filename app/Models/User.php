@@ -59,6 +59,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'role_num',
+        'gender_num'
     ];
 
     /**
@@ -76,7 +78,9 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * @var array
      */
     protected $appends = [
-        'phone'
+        'phone',
+        'role',
+        'gender'
     ];
 
     /**
@@ -87,6 +91,26 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function getPhoneAttribute()
     {
         return $this->hasOne(Phone::class);
+    }
+
+    /**
+     * Get the user's role.
+     *
+     * @return string
+     */
+    public function getRoleAttribute()
+    {
+        return User::ROLE[$this->role_num];
+    }
+
+    /**
+     * Get the user's gender.
+     *
+     * @return string
+     */
+    public function getGenderAttribute()
+    {
+        return User::GENDER[$this->gender_num];
     }
 
     /**
