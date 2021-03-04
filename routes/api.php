@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Auth\FirebaseAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +31,10 @@ $api->version('v1', function ($api) {
     });
 
     $api->group(['middleware' => 'guest:api'], function ($api) {
-        $api->post('login', [LoginController::class, 'login'])->name('login');
-        $api->post('register', [RegisterController::class, 'register']);
+        $api->post('login/email', [LoginController::class, 'login'])->name('login');
+        $api->post('login/phone', [FirebaseAuthController::class, 'login'])->name('login.phone');
+        $api->post('register/email', [RegisterController::class, 'register']);
+        $api->post('register/phone', [FirebaseAuthController::class, 'register']);
     
         $api->post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
         $api->post('password/reset', [ResetPasswordController::class, 'reset']);

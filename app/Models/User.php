@@ -90,7 +90,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      */
     public function getPhoneAttribute()
     {
-        return $this->hasOne(Phone::class);
+        return $this->hasOne(Phone::class)->get();
     }
 
     /**
